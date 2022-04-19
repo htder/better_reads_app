@@ -42,8 +42,8 @@ public class SearchController {
                         .bodyToMono(SearchResult.class);
         SearchResult result = resultsMono.block();
         List<SearchResultBook> books = result.getDocs()
-                                    .stream()
-                                    .limit(10)
+                .stream()
+                .limit(10)
                 .map(bookResult -> {
                     bookResult.setKey(bookResult.getKey().replace("/works/", ""));
                     String coverId = bookResult.getCover_i();
@@ -55,7 +55,7 @@ public class SearchController {
                     bookResult.setCover_i(coverId);
                     return bookResult;
                 })
-                                    .collect(Collectors.toList());
+                .collect(Collectors.toList());
         model.addAttribute("searchResult", books);
         return "search";
     }
